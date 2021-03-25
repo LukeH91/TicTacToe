@@ -2,8 +2,9 @@
 from IPython.display import clear_output
 import random
 
-# Sets the default board setup
+# Sets the default board setup, sets the win check result to false
 gamelist = ["#"," "," "," "," "," "," "," "," "," "]
+wincheck_result = False
 
 # Function for resetting the board back to default
 def reset_game():
@@ -62,7 +63,7 @@ def position_choice_one():
             print("PLAYER 1: This is not within the range 1-9.")
     if gamelist[int(choice)] != " ":
         print("PLAYER 1: This space is occupied, try another.")
-        position_choice()
+        position_choice_one()
     else:
         clear_output()
         gamelist[int(choice)] = player_one_symbol
@@ -77,7 +78,7 @@ def position_choice_two():
             print("PLAYER 2: This is not within the range 1-9.")
     if gamelist[int(choice)] != " ":
         print("PLAYER 2: This space is occupied, try another.")
-        position_choice()
+        position_choice_two()
     else:
         clear_output()
         gamelist[int(choice)] = player_two_symbol
@@ -87,68 +88,74 @@ def position_choice_two():
 # If there is no winner, returns "false"
 def wincheck():
     global wincheck_result
-    if gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_one_symbol:
+    if " " not in gamelist:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! It's a draw!!!")
+    elif gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_one_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     elif gamelist[4] == gamelist[5] == gamelist[6] and gamelist[4] == player_one_symbol:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[4] == gamelist[5] == gamelist[6] and gamelist[4] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     elif gamelist[7] == gamelist[8] == gamelist[9] and gamelist[7] == player_one_symbol:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[7] == gamelist[8] == gamelist[9] and gamelist[7] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     elif gamelist[1] == gamelist[4] == gamelist[7] and gamelist[1] == player_one_symbol:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[1] == gamelist[4] == gamelist[7] and gamelist[1] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     elif gamelist[2] == gamelist[5] == gamelist[8] and gamelist[2] == player_one_symbol:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[2] == gamelist[5] == gamelist[8] and gamelist[2] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     elif gamelist[3] == gamelist[6] == gamelist[9] and gamelist[3] == player_one_symbol:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[3] == gamelist[6] == gamelist[9] and gamelist[3] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     elif gamelist[1] == gamelist[5] == gamelist[9] and gamelist[1] == player_one_symbol:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[1] == gamelist[5] == gamelist[9] and gamelist[1] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     elif gamelist[3] == gamelist[5] == gamelist[7] and gamelist[3] == player_one_symbol:
         wincheck_result = True
-        print("Game over! Player 1 wins!!!")
+        print("GAME OVER! Player 1 wins!!!")
     elif gamelist[3] == gamelist[5] == gamelist[7] and gamelist[3] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
     else:
-        wincheck_result = False
+        return False
 
 # If there is a winner, this checks if the players want to play another game. 
+# If "yes" is selected, the output is cleared, the board is reset, and the wincheck result is set back to False. 
 def gameon_check():
+    global gamelist, wincheck_result
     continuecheck = "wrong"
     while continuecheck not in ["Y","N"]:
         continuecheck = input("Do you want to play again? Y/N :")
         if continuecheck not in ["Y","N"]:
             print("This is not a Y or an N.")
     if continuecheck == "Y":
-        reset_game()
+        gamelist = ["#"," "," "," "," "," "," "," "," "," "]
         clear_output()
         gamecontinue = True
+        wincheck_result = False
     else:
         gamecontinue = False    
     return gamecontinue    
