@@ -1,0 +1,170 @@
+# Imports required modules
+from IPython.display import clear_output
+import random
+
+# Sets the default board setup
+gamelist = ["#"," "," "," "," "," "," "," "," "," "]
+
+# Function for resetting the board back to default
+def reset_game():
+    gamelist = ["#"," "," "," "," "," "," "," "," "," "]
+
+# Draws the game board and inserts the current game list
+def gameboard(gamelist):
+    print(" 1 | 2 | 3 ")
+    print(" " + gamelist[1] + " | " + gamelist[2] + " | " + gamelist[3])
+    print("---|---|---")
+    print(" 4 | 5 | 6 ")
+    print(" " + gamelist[4] + " | " + gamelist[5] + " | " + gamelist[6])
+    print("---|---|---")
+    print(" 7 | 8 | 9 ")
+    print(" " + gamelist[7] + " | " + gamelist[8] + " | " + gamelist[9])
+    
+# Randomly assigns one player to go first, and lets that player choose their symbol.
+# Assigns the other symbol to the player in second automatically. 
+def symbol_choice():
+    global order, player_one_symbol, player_two_symbol
+    order = random.randint(0,1)
+    if order == 0:
+        print("Player 1 will go first!")
+        player_one_symbol = "wrong"
+        while player_one_symbol == "wrong":
+            player_one_symbol = input("Player 1, would you like to play as X or O? ")
+            if player_one_symbol not in ["X","O"]:
+                print("Please select either X or O.")
+                player_one_symbol = "wrong"  
+        if player_one_symbol == "O":
+            player_two_symbol = "X"
+        else:
+            player_two_symbol = "O"
+        clear_output()
+    else:
+        print("Player 2 will go first!")        
+        player_two_symbol = "wrong"
+        while player_two_symbol == "wrong":
+            player_two_symbol = input("Player 2, would you like to play as X or O? ")
+            if player_two_symbol not in ["X","O"]:
+                print("Please select either X or O.")
+                player_two_symbol = "wrong" 
+        if player_two_symbol == "O":
+            player_one_symbol = "X"
+        else:
+            player_one_symbol = "O"
+        clear_output()
+
+# Allows player 1 to take their turn, by letting them choose a location and putting their symbol there. 
+def position_choice_one():
+    choice = "wrong"
+    gameboard(gamelist)
+    while choice not in ["1","2","3","4","5","6","7","8","9"]:
+        choice = input("PLAYER 1: Pick a position on the board (1-9): ")
+        if choice not in ["1","2","3","4","5","6","7","8","9"]:
+            print("PLAYER 1: This is not within the range 1-9.")
+    if gamelist[int(choice)] != " ":
+        print("PLAYER 1: This space is occupied, try another.")
+        position_choice()
+    else:
+        clear_output()
+        gamelist[int(choice)] = player_one_symbol
+
+# Allows player 2 to take their turn, by letting them choose a location and putting their symbol there. 
+def position_choice_two():
+    choice = "wrong"
+    gameboard(gamelist)
+    while choice not in ["1","2","3","4","5","6","7","8","9"]:
+        choice = input("PLAYER 2: Pick a position on the board (1-9): ")
+        if choice not in ["1","2","3","4","5","6","7","8","9"]:
+            print("PLAYER 2: This is not within the range 1-9.")
+    if gamelist[int(choice)] != " ":
+        print("PLAYER 2: This space is occupied, try another.")
+        position_choice()
+    else:
+        clear_output()
+        gamelist[int(choice)] = player_two_symbol
+
+# Checks all possible win states and finds out which player, if any, has won. 
+# Prints out the name of the winning player, as well as returning "true" is there is a winner.
+# If there is no winner, returns "false"
+def wincheck():
+    global wincheck_result
+    if gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    elif gamelist[4] == gamelist[5] == gamelist[6] and gamelist[4] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[4] == gamelist[5] == gamelist[6] and gamelist[4] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    elif gamelist[7] == gamelist[8] == gamelist[9] and gamelist[7] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[7] == gamelist[8] == gamelist[9] and gamelist[7] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    elif gamelist[1] == gamelist[4] == gamelist[7] and gamelist[1] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[1] == gamelist[4] == gamelist[7] and gamelist[1] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    elif gamelist[2] == gamelist[5] == gamelist[8] and gamelist[2] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[2] == gamelist[5] == gamelist[8] and gamelist[2] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    elif gamelist[3] == gamelist[6] == gamelist[9] and gamelist[3] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[3] == gamelist[6] == gamelist[9] and gamelist[3] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    elif gamelist[1] == gamelist[5] == gamelist[9] and gamelist[1] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[1] == gamelist[5] == gamelist[9] and gamelist[1] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    elif gamelist[3] == gamelist[5] == gamelist[7] and gamelist[3] == player_one_symbol:
+        wincheck_result = True
+        print("Game over! Player 1 wins!!!")
+    elif gamelist[3] == gamelist[5] == gamelist[7] and gamelist[3] == player_two_symbol:
+        wincheck_result = True
+        print("GAME OVER! Player 2 wins!!!")
+    else:
+        wincheck_result = False
+
+# If there is a winner, this checks if the players want to play another game. 
+def gameon_check():
+    continuecheck = "wrong"
+    while continuecheck not in ["Y","N"]:
+        continuecheck = input("Do you want to play again? Y/N :")
+        if continuecheck not in ["Y","N"]:
+            print("This is not a Y or an N.")
+    if continuecheck == "Y":
+        reset_game()
+        clear_output()
+        gamecontinue = True
+    else:
+        gamecontinue = False    
+    return gamecontinue    
+
+# This is the actual game. It begins by asking the players which symbols they want, then enables the game.
+# Then it gives the players one turn each, until a winner is detected. 
+# Once a winner is detected, it asks the players if they would like to try again. 
+symbol_choice()
+game_on = True
+while game_on == True:
+    if order % 2 == 0:
+        position_choice_one()
+    else:
+        position_choice_two()
+    wincheck()
+    if wincheck_result == True:
+        gameboard(gamelist)
+        game_on = gameon_check()
+    order = order + 1
