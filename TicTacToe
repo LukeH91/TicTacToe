@@ -62,6 +62,7 @@ def position_choice_one():
         if choice not in ["1","2","3","4","5","6","7","8","9"]:
             print("PLAYER 1: This is not within the range 1-9.")
     if gamelist[int(choice)] != " ":
+        clear_output()
         print("PLAYER 1: This space is occupied, try another.")
         position_choice_one()
     else:
@@ -77,6 +78,7 @@ def position_choice_two():
         if choice not in ["1","2","3","4","5","6","7","8","9"]:
             print("PLAYER 2: This is not within the range 1-9.")
     if gamelist[int(choice)] != " ":
+        clear_output()
         print("PLAYER 2: This space is occupied, try another.")
         position_choice_two()
     else:
