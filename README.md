@@ -1,4 +1,4 @@
-# TicTacToe
+# TicTacToe 1.3
 My first ever project in Python - a Tic-Tac-Toe game. 
 
 1.0 - First completed version
