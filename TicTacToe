@@ -1,3 +1,5 @@
+# Tic-Tac-Toe 1.2 by Luke Holmes
+
 # Imports required modules
 from IPython.display import clear_output
 import random
