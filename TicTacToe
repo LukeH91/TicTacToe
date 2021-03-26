@@ -1,4 +1,4 @@
-# Tic-Tac-Toe 1.2 by Luke Holmes
+# Tic-Tac-Toe 1.3 by Luke Holmes
 
 # Imports required modules
 from IPython.display import clear_output
@@ -92,10 +92,7 @@ def position_choice_two():
 # If there is no winner, returns "false"
 def wincheck():
     global wincheck_result
-    if " " not in gamelist:
-        wincheck_result = True
-        print("GAME OVER! It's a draw!!!")
-    elif gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_one_symbol:
+    if gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_one_symbol:
         wincheck_result = True
         print("GAME OVER! Player 1 wins!!!")
     elif gamelist[1] == gamelist[2] == gamelist[3] and gamelist[1] == player_two_symbol:
@@ -143,6 +140,9 @@ def wincheck():
     elif gamelist[3] == gamelist[5] == gamelist[7] and gamelist[3] == player_two_symbol:
         wincheck_result = True
         print("GAME OVER! Player 2 wins!!!")
+    elif " " not in gamelist:
+        wincheck_result = True
+        print("GAME OVER! It's a draw!!!")
     else:
         return False
 
