@@ -1,4 +1,4 @@
-# Tic-Tac-Toe 1.3 by Luke Holmes
+# Tic-Tac-Toe 1.4 by Luke Holmes
 
 # Imports required modules
 from IPython.display import clear_output
@@ -32,7 +32,7 @@ def symbol_choice():
         print("Player 1 will go first!")
         player_one_symbol = "wrong"
         while player_one_symbol == "wrong":
-            player_one_symbol = input("Player 1, would you like to play as X or O? ")
+            player_one_symbol = input("Player 1, would you like to play as X or O? ").upper()
             if player_one_symbol not in ["X","O"]:
                 print("Please select either X or O.")
                 player_one_symbol = "wrong"  
@@ -45,7 +45,7 @@ def symbol_choice():
         print("Player 2 will go first!")        
         player_two_symbol = "wrong"
         while player_two_symbol == "wrong":
-            player_two_symbol = input("Player 2, would you like to play as X or O? ")
+            player_two_symbol = input("Player 2, would you like to play as X or O? ").upper()
             if player_two_symbol not in ["X","O"]:
                 print("Please select either X or O.")
                 player_two_symbol = "wrong" 
@@ -152,7 +152,7 @@ def gameon_check():
     global gamelist, wincheck_result
     continuecheck = "wrong"
     while continuecheck not in ["Y","N"]:
-        continuecheck = input("Do you want to play again? Y/N :")
+        continuecheck = input("Do you want to play again? Y/N :").upper()
         if continuecheck not in ["Y","N"]:
             print("This is not a Y or an N.")
     if continuecheck == "Y":
